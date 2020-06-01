@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject UserManager<IdentityUser> userManager;
+
+@model TerugbelnotitiesApp.Models.NotitieViewModel
+@{
+	ViewData["Title"] = "Add";
+}
+
+<div style="text-align: center;">
+	<h1>Terugbellen</h1>
+	<h6>Voeg een nieuwe terugbelnotitie toe.</h6>
+</div>
+
+<form method="post">
+	<div class="form-group">
+		<label> Categorie</label>
+		<br />
+		<select asp-for="Category">
+			<option value="Terugbellen">Terugbellen</option>
+			<option value="Spoed">Spoed</option>
+			<option value="Lage prioriteit">Lage prioriteit</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label> Toegewezen</label>
+		<br />
+		<select asp-for="AssignedUserName">
+			@foreach (var user in userManager.Users)
+			{
+				<option value="@user.UserName">@user.UserName</option>
+			}
+		</select>
+	</div>
+	<div class="form-group">
+		<label>Notitie (optioneel)</label>
+		<input asp-for="Notitie" class="form-control" />
+	</div>
+
+	<div class="form-group">
+		<label>Persoon die gebeld moet worden</label>
+		<input asp-for="PersonToCallName" class="form-control" />
+		<span asp-validation-for="PersonToCallName" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label>Telefoonnummer</label>
+		<input asp-for="Phone" class="form-control" />
+		<span asp-validation-for="Phone" class="text-danger"></span>
+	</div>
+
+	<button class="btn" style="background-color:#73b981; color: white;" type="submit">Toevoegen</button>
+</form>
+

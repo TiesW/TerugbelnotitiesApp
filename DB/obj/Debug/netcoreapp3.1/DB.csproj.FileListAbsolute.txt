@@ -1,0 +1,8 @@
+C:\Users\Ties\Documents\code\C#\TerugbelnotitiesApp\DB\bin\Debug\netcoreapp3.1\DB.deps.json
+C:\Users\Ties\Documents\code\C#\TerugbelnotitiesApp\DB\bin\Debug\netcoreapp3.1\DB.dll
+C:\Users\Ties\Documents\code\C#\TerugbelnotitiesApp\DB\bin\Debug\netcoreapp3.1\DB.pdb
+C:\Users\Ties\Documents\code\C#\TerugbelnotitiesApp\DB\obj\Debug\netcoreapp3.1\DB.csproj.CoreCompileInputs.cache
+C:\Users\Ties\Documents\code\C#\TerugbelnotitiesApp\DB\obj\Debug\netcoreapp3.1\DB.AssemblyInfoInputs.cache
+C:\Users\Ties\Documents\code\C#\TerugbelnotitiesApp\DB\obj\Debug\netcoreapp3.1\DB.AssemblyInfo.cs
+C:\Users\Ties\Documents\code\C#\TerugbelnotitiesApp\DB\obj\Debug\netcoreapp3.1\DB.dll
+C:\Users\Ties\Documents\code\C#\TerugbelnotitiesApp\DB\obj\Debug\netcoreapp3.1\DB.pdb
