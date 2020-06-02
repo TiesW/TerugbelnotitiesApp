@@ -19,6 +19,7 @@ namespace TerugbelnotitiesApp.Models
         public string Category { get; set; }
         public bool Processed { get; set; }
         [Required (ErrorMessage = "Voer een telefoonnummer in.")]
+        [Phone (ErrorMessage = "Voer een geldig telefoonnummer in.")]
         [StringLength(15)]
         public string Phone { get; set; }
         [Required (ErrorMessage = "Voer een contactpersoon in.")]

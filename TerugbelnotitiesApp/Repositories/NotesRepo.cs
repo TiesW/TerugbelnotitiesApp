@@ -30,9 +30,9 @@ namespace TerugbelnotitiesApp.Repositories
                 Timestamp = n.Timestamp
             }).ToListAsync();
         }
-        public void addNote(NotitieViewModel model)
+        public async Task addNote(NotitieViewModel model)
         {
-            context.Notities.Add(new Notities
+            await context.Notities.AddAsync(new Notities
             {
                 AssignedUserId = model.AssignedUserId,
                 AssignedUserName = model.AssignedUserName,
@@ -45,28 +45,27 @@ namespace TerugbelnotitiesApp.Repositories
                 Processed = model.Processed,
                 Timestamp = model.Timestamp
             });
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void deleteNote(int Id)
+        public async Task deleteNote(int Id)
         {
-            var note = context.Notities.Single(w => w.Id == Id);
+            var note = context.Notities.Single(n => n.Id == Id);
             context.Notities.Remove(note);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void editNote(int id, string notitie)
+        public async Task editNote(int id, string notitie)
         {
-            var note = context.Notities.Single(w => w.Id == id);
+            var note = context.Notities.Single(n => n.Id == id);
             note.Notitie = notitie;
-            //note.Processed = note.Processed;
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
-        public void editNoteProcessed(int id, bool processed)
+        public async Task editProcessed(int id, bool processed)
         {
-            var note = context.Notities.Single(w => w.Id == id);
+            var note = context.Notities.Single(n => n.Id == id);
             note.Processed = processed;
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

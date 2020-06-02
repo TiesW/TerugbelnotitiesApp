@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -42,12 +43,11 @@ namespace TerugbelnotitiesApp.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Add(NotitieViewModel model)
+        public async Task<IActionResult> Add(NotitieViewModel model)
         {
             model.AssigningUserName = userManager.GetUserName(HttpContext.User);
             model.AssigningUserId = userManager.GetUserId(HttpContext.User);
-            //model.Id = 239;
-            model.AssignedUserId = userManager.GetUserId(HttpContext.User); //userManager.GetUserId(userManager.FindByNameAsync(model.AssignedUserName));
+            model.AssignedUserId = userManager.FindByNameAsync(model.AssignedUserName).Result.Id;
             model.Timestamp = DateTime.Now;
             model.Processed = false;
 
@@ -55,36 +55,35 @@ namespace TerugbelnotitiesApp.Controllers
             {
                 return View(model);
             }
-            repo.addNote(model);
+            await repo.addNote(model);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int Id)
+        public async Task<IActionResult> Delete(int Id)
         {
-            repo.deleteNote(Id);
+            await repo.deleteNote(Id);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Edit(NotitiesViewModel model, int id)
+        public async Task<IActionResult> EditNote(NotitiesViewModel model, int id)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Index");
             }
-            repo.editNote(id, model.editedNote);
+            await repo.editNote(id, model.editedNote);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult EditProcessed(NotitiesViewModel model, int id)
+        public async Task<IActionResult> EditProcessed(NotitiesViewModel model, int id)
         {
-            Debug.WriteLine(model.editedProcessed);
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Index");
             }
-            repo.editNoteProcessed(id, model.editedProcessed);
+            await repo.editProcessed(id, model.editedProcessed);
             return RedirectToAction("Index");
         }
 

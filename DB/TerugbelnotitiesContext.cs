@@ -30,8 +30,6 @@ namespace DB
         {
             modelBuilder.Entity<Notities>(entity =>
             {
-                //entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.AssignedUserName).IsUnicode(false);
 
                 entity.Property(e => e.AssigningUserName).IsUnicode(false);

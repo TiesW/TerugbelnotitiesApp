@@ -3,15 +3,6 @@
 	ViewData["Title"] = "Home Page";
 }
 
-<script src="~/lib/jquery/dist/jquery.min.js">
-	$('.table .accordian-body').on('show.bs.collapse', function () {
-		$(this).closest("table")
-			.find(".collapse.in")
-			.not(this)
-			.collapse('toggle')
-	})
-</script>
-
 <div class="text-center">
 	<h1 class="display-4">Terugbelnotities</h1>
 	<p>Overzicht van alle terugbelnotities en bijbehorende details.</p>
@@ -48,9 +39,16 @@
 			{
 				<td><img src="~/Uploads/circleOrange.svg" width="10" height="10" /> @note.Category</td>
 			}
-			<td>
-				<form asp-controller="Home" asp-action="EditProcessed" asp-route-id="@note.Id" method="post" id="updateBool">
-					<input type="checkbox" asp-for="@note.Processed.Value" onchange="$('#updateBool').submit();"/>
+			<td data-toggle="false">
+				<form asp-controller="Home" asp-action="EditProcessed" asp-route-id="@note.Id" method="post" id="bool_@(note.Id)">
+					@if (note.Processed.Value == true)
+					{
+						<input type="checkbox" onclick="event.stopPropagation()" onchange="$(bool_@(note.Id)).submit();" asp-for="editedProcessed" checked/>
+					}
+					else
+					{
+						<input type="checkbox" onclick="event.stopPropagation()" onchange="$(bool_@(note.Id)).submit();" asp-for="editedProcessed" />
+					}
 				</form>
 			</td>
 		</tr>
@@ -58,7 +56,7 @@
 			<td colspan="6" class="hiddenRow">
 				<div class="accordian-body collapse" style="padding:10px;" id="row_@(note.Id)">
 					<span>Notitie:</span>
-					<form asp-controller="Home" asp-action="Edit" asp-route-id="@note.Id" method="post">
+					<form asp-controller="Home" asp-action="EditNote" asp-route-id="@note.Id" method="post">
 						<input type="text" asp-for="editedNote" value="@note.Notitie" class="form-control" id="note_@(note.Id)" style="margin-top: 5px; margin-bottom: 5px;" />
 					</form>
 					<span>Contactpersoon:</span>
@@ -69,7 +67,7 @@
 					<br />
 					<span style="font-weight: 500;">@note.Phone</span>
 					<a asp-controller="Home" asp-action="Delete" asp-route-id="@note.Id">
-						<input type="button" class="btn" value="Verwijderen" style="float:right; color:red;" />
+						<input type="button" class="btn" value="Verwijderen" id="deleteBtn" />
 					</a>
 				</div>
 			</td>
@@ -80,5 +78,5 @@
 <br />
 
 <a asp-controller="Home" asp-action="Add">
-	<input type="button" class="btn" value="Notitie toevoegen" style="float:right; background-color:lightgray;" />
+	<input type="button" class="btn" id="addBtn" value="Notitie toevoegen" />
 </a>

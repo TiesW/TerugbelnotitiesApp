@@ -74,3 +74,18 @@ body {
     padding: 0 !important;
     background-color: #efefef;
 }
+
+#addBtn {
+    float: right;
+    background-color: lightgray;
+}
+
+#deleteBtn {
+    float: right;
+    color: red;
+}
+
+#addNoteBtn {
+    background-color: #73b981;
+    color: white;
+}
